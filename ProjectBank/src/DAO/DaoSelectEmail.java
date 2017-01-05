@@ -1,25 +1,29 @@
-package requestsDataBaza;
+/**
+ * 
+ */
+package DAO;
 
 import java.beans.PropertyVetoException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import requestsDataBaza.DataSource;
+import tableDataBaza.User;
 
-import DAO.DaoScore;
-import tableDataBaza.Score;
-
-public class ReguestGetScore extends DaoScore  {
-
-	@Override
-	public void getScore() {
+/**
+ * @author User
+ * @param <E_MAIL>
+ *
+ */
+public class DaoSelectEmail<E_MAIL> extends DaoSelect {
+	public void select() {
 		Connection cn = null;
-		//cn = Connect.getConnection();
 		try {
-			cn = DataSource.getInstance().getConnection();
+			cn = DataSource.getInstance().getConnection();// подключение пула Connection
 		} catch (SQLException | PropertyVetoException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		try {
@@ -28,16 +32,13 @@ public class ReguestGetScore extends DaoScore  {
 				st = cn.createStatement();
 				ResultSet rs = null;
 				try { // 3 блок
-					rs = st.executeQuery("SELECT * FROM score ");
-					ArrayList<Score> lst = new ArrayList<>();
+					rs = st.executeQuery("SELECT E_MAIL FROM user;");
+					ArrayList< E_MAIL> lst = new ArrayList<>();
 
 					while (rs.next()) {
-						int ID_SCORE = rs.getInt(1);
-						int ID_CARD = rs.getInt(2);
-						int BALANCE = rs.getInt(3);
-						String CONDITION_SCORE = rs.getString(4);
-						
-						lst.add(new Score(ID_SCORE, ID_CARD, BALANCE, CONDITION_SCORE));
+						String E_mail = rs.getString(1);
+
+						lst.add((E_MAIL) E_mail);
 					}
 
 					if (lst.size() > 0) {
@@ -89,18 +90,18 @@ public class ReguestGetScore extends DaoScore  {
 	}
 
 	@Override
-	public void addPayment() {
-		// TODO Auto-generated method stub
-		
+	public void insert() {
+
 	}
 
 	@Override
-	public void addUser() {
-		// TODO Auto-generated method stub
-		
+	public void update() {
+
 	}
 
-		
+	@Override
+	public void drop() {
+
 	}
 
-
+}

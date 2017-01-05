@@ -1,7 +1,7 @@
 /**
  * 
  */
-package requestsDataBaza;
+package DAO;
 
 import java.beans.PropertyVetoException;
 import java.sql.Connection;
@@ -10,24 +10,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import DAO.DaoPayment;
-import tableDataBaza.Payment;
-import tableDataBaza.Score;
+import requestsDataBaza.DataSource;
+import tableDataBaza.User;
 
 /**
  * @author User
  *
  */
-public  class ReguestAddPayment extends DaoPayment {
-
-	@Override
-	public void addPayment() {
+public class DaoSelectPassword extends DaoSelect {
+	public void select() {
+		String passwordBaza;
 		Connection cn = null;
-		//cn = Connect.getConnection();
 		try {
-			cn = DataSource.getInstance().getConnection();
+			cn = DataSource.getInstance().getConnection();// подключение пула
+															// Connection
 		} catch (SQLException | PropertyVetoException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		try {
@@ -36,24 +33,15 @@ public  class ReguestAddPayment extends DaoPayment {
 				st = cn.createStatement();
 				ResultSet rs = null;
 				try { // 3 блок
-					rs = st.executeQuery("SELECT * FROM payment ");
-					ArrayList<Payment> lst = new ArrayList<>();
+					rs = st.executeQuery("SELECT PASSWORD_ FROM user WHERE E_MAIL='nikita@gmail.com';");
 
 					while (rs.next()) {
-						int ID_PAYMENT = rs.getInt(1);
-						int ID_SCORE = rs.getInt(2);
-						int SUM_PAYMENT = rs.getInt(4);
-						String TYPE_PAYMENT = rs.getString(3);
-						
-						lst.add(new Payment(ID_PAYMENT, ID_SCORE, TYPE_PAYMENT, SUM_PAYMENT));
-					}
+						String PASSWORD_ = rs.getString(1);
 
-					if (lst.size() > 0) {
-						System.out.println(lst);
-					} else {
-						System.out.println("Not found");
-					}
+						passwordBaza = PASSWORD_;
 
+						System.out.println(passwordBaza);
+					}
 				} finally { // для 3-го блока try
 					/*
 					 * закрыть ResultSet, если он был открыт или ошибка
@@ -97,17 +85,21 @@ public  class ReguestAddPayment extends DaoPayment {
 	}
 
 	@Override
-	public void addUser() {
+	public void insert() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void getScore() {
+	public void update() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-		
+	@Override
+	public void drop() {
+		// TODO Auto-generated method stub
+
+	}
 
 }

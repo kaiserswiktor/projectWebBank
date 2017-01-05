@@ -10,13 +10,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import DAO.DaoSelectEmail;
+import DAO.DaoSelectPassword;
 import tableDataBaza.User;
 
 public class Main {
 	public static  void main(String args[])
 			throws IOException, PropertyVetoException, SQLException, InstantiationException, IllegalAccessException {
-
-		Connection cn = null;
+		DaoSelectEmail m= new DaoSelectEmail();	
+		m.select();
+	
+		/*Connection cn = null;
 		//cn = Connect.getConnection();
 		cn = DataSource.getInstance().getConnection();
 		try {
@@ -49,7 +53,7 @@ public class Main {
 					/*
 					 * закрыть ResultSet, если он был открыт или ошибка
 					 * произошла во время чтения из него данных
-					 */
+					 
 					if (rs != null) { // был ли создан ResultSet
 						rs.close();
 					} else {
@@ -60,7 +64,7 @@ public class Main {
 				/*
 				 * закрыть Statement, если он был открыт или ошибка произошла во
 				 * время создания Statement
-				 */
+				 
 				if (st != null) { // для 2-го блока try
 					st.close();
 				} else {
@@ -71,11 +75,11 @@ public class Main {
 			System.err.println("DB connection error: " + e);
 			/*
 			 * вывод сообщения о всех SQLException
-			 */
+			 
 		} finally {
 			/*
 			 * закрыть Connection, если он был открыт
-			 */
+			 
 			if (cn != null) {
 				try {
 					cn.close();
@@ -85,6 +89,7 @@ public class Main {
 			}
 		}
 
-	}
+	}*/
 
+}
 }

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package requestsDataBaza;
+package DAO;
 
 import java.beans.PropertyVetoException;
 import java.sql.Connection;
@@ -10,38 +10,22 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import DAO.DaoUser;
+import requestsDataBaza.DataSource;
 import tableDataBaza.User;
 
 /**
  * @author User
  *
  */
-public class ReguestAddUser extends DaoUser  {
-
-	@Override
-	public void addPayment() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void getScore() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void addUser() {
+public class DaoSelectUser extends DaoSelect {
+	public void select() {
+		String idUser;
+		String firstName;
+		String lastName;
 		Connection cn = null;
-		//cn = Connect.getConnection();
 		try {
-			cn = DataSource.getInstance().getConnection();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (PropertyVetoException e1) {
-			// TODO Auto-generated catch block
+			cn = DataSource.getInstance().getConnection();// подключение пула Connection
+		} catch (SQLException | PropertyVetoException e1) {
 			e1.printStackTrace();
 		}
 		try {
@@ -50,27 +34,20 @@ public class ReguestAddUser extends DaoUser  {
 				st = cn.createStatement();
 				ResultSet rs = null;
 				try { // 3 блок
-					rs = st.executeQuery("SELECT * FROM user ");
-					ArrayList<User> lst = new ArrayList<>();
+					rs = st.executeQuery("SELECT ID_USER, FIRST_NAME,LAST_NAME FROM user WHERE E_MAIL='nikita@gmail.com'");
+					ArrayList< User> lst = new ArrayList<>();
 
 					while (rs.next()) {
-						int idUser = rs.getInt(1);
-						String firstName = rs.getString(2);
-						String lastName = rs.getString(3);
-						String eMail = rs.getString(4);
-						String password = rs.getString(5);
-						String role = rs.getString(6);
+						 idUser = rs.getString(1);
+						 firstName = rs.getString(2);
+						 lastName = rs.getString(3);
+						
+					
 
-						lst.add(new User(idUser, firstName, lastName, eMail, password, role));
-					}
+						System.out.println(idUser+firstName+lastName);}}
 
-					if (lst.size() > 0) {
-						System.out.println(lst);
-					} else {
-						System.out.println("Not found");
-					}
 
-				} finally { // для 3-го блока try
+				 finally { // для 3-го блока try
 					/*
 					 * закрыть ResultSet, если он был открыт или ошибка
 					 * произошла во время чтения из него данных
@@ -112,4 +89,21 @@ public class ReguestAddUser extends DaoUser  {
 
 	}
 
+	@Override
+	public void insert() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void drop() {
+		// TODO Auto-generated method stub
+		
+	}
 }

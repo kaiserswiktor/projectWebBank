@@ -1,9 +1,7 @@
 package Servlet;
 
 
-import java.beans.PropertyVetoException;
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import requestsDataBaza.Main;
-import requestsDataBaza.ReguestAddPayment;
-import requestsDataBaza.ReguestGetScore;
+import DAO.DaoSelectEmail;
+import DAO.DaoSelectPassword;
+import DAO.DaoSelectUser;
 
 /**
  * Servlet implementation class ServletBank
@@ -47,11 +45,14 @@ public class ServletBank extends HttpServlet {
 	}
 	protected void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		ReguestAddPayment m=new ReguestAddPayment();
-    
-		m.addPayment();
+		DaoSelectPassword m=new DaoSelectPassword();
+		DaoSelectEmail b= new DaoSelectEmail();
+		DaoSelectUser n = new DaoSelectUser();
+		m.select();
+		b.select();
+		n.select();
 	
-     String idUser="ff";
+    String idUser="ff";
 		request.setCharacterEncoding("UTF-8");
 		
 		request.setAttribute("idUser",idUser);
