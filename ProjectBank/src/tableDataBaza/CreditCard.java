@@ -12,9 +12,8 @@ private int idCard;
 public CreditCard(){
 	
 }
-public CreditCard(int idUser,int idCard){
+public CreditCard(int idCard){
 	this.idCard=idCard;
-	this.idUser=idUser;
 }
 public int getIdCard(){
 	return idCard;

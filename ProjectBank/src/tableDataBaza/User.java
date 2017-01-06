@@ -14,10 +14,11 @@ public class User {
 	private String password;
 	private String role;
 	
-	public User(int idUser, String firstName, String lastName){
-		this.idUser = idUser;
+	public User( String firstName, String lastName,String role){
+		
 		this.firstName = firstName;
-		this.lastName = lastName;	
+		this.lastName = lastName;
+		this.role = role;
 	}
 
 	public User(int idUser, String firstName, String lastName, String eMail, String password, String role) {

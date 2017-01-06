@@ -8,44 +8,38 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.ResourceBundle;
+
 import requestsDataBaza.DataSource;
-import tableDataBaza.User;
 
 /**
  * @author User
- * @param <E_MAIL>
- *
+ *Class request to comparison Email and Password 
  */
-public class DaoSelectEmail<E_MAIL> extends DaoSelect {
-	public void select() {
+public class DaoSelectEmailPassword {
+
+	public boolean selectCheckUser(String login, String password) throws SQLException {
+		ResourceBundle resource = ResourceBundle.getBundle("recourse.PrepareStatement");
+		String EmailPassword = resource.getString("EmailPassword");
+		System.out.println("yjhv");
+		ResultSet rs = null;
 		Connection cn = null;
 		try {
-			cn = DataSource.getInstance().getConnection();// подключение пула Connection
+			cn = DataSource.getInstance().getConnection();// подключение пула
+															// Connection
 		} catch (SQLException | PropertyVetoException e1) {
 			e1.printStackTrace();
 		}
 		try {
-			Statement st = null;
+			PreparedStatement st = null;
+
 			try { // 2 блок
-				st = cn.createStatement();
-				ResultSet rs = null;
 				try { // 3 блок
-					rs = st.executeQuery("SELECT E_MAIL FROM user;");
-					ArrayList< E_MAIL> lst = new ArrayList<>();
-
-					while (rs.next()) {
-						String E_mail = rs.getString(1);
-
-						lst.add((E_MAIL) E_mail);
-					}
-
-					if (lst.size() > 0) {
-						System.out.println(lst);
-					} else {
-						System.out.println("Not found");
-					}
+					st = cn.prepareStatement(EmailPassword);
+					st.setString(1, login);
+					st.setString(2, password);
+					rs = st.executeQuery();
+					
 
 				} finally { // для 3-го блока try
 					/*
@@ -58,7 +52,9 @@ public class DaoSelectEmail<E_MAIL> extends DaoSelect {
 						System.err.println("ошибка во время чтения из БД");
 					}
 				}
-			} finally {
+			} finally
+
+			{
 				/*
 				 * закрыть Statement, если он был открыт или ошибка произошла во
 				 * время создания Statement
@@ -86,22 +82,7 @@ public class DaoSelectEmail<E_MAIL> extends DaoSelect {
 				}
 			}
 		}
+		return rs.next();
 
 	}
-
-	@Override
-	public void insert() {
-
-	}
-
-	@Override
-	public void update() {
-
-	}
-
-	@Override
-	public void drop() {
-
-	}
-
 }

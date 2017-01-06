@@ -12,14 +12,13 @@ public class Score {
 private int idScore;
 private int idCard;
 private int balance;
-private String conditionScore;
-public Score() {
-}
-	public Score(int idScore,int idCard,int balance,String conditionScore) {
+private String ConditionScore;
+
+	public Score(int idScore,int idCard,int balance,String ConditionScore) {
 	this.idScore=idScore;
 	this.idCard=idCard;
 	this.balance=balance;
-	this.conditionScore=conditionScore;
+	this.ConditionScore=ConditionScore;
 	}
 	public int getIdScore(){
 		return idScore;
@@ -39,14 +38,14 @@ public Score() {
 	public void setBalance(int balance){
 		this.balance=balance;
 	}
-	public String getconditionScore(){
-		return conditionScore;
+	public String getConditionScore(){
+		return ConditionScore;
 	}
-	public void setconditionScore(String conditionScore){
-		this.conditionScore=conditionScore;
+	public void setConditionScore(String conditionScore){
+		this.ConditionScore=conditionScore;
 	}
 	@Override
 	public String toString(){
-		return "idScore-"+idScore+" idCard-"+idCard+" balance-"+balance+" conditionScore-"+conditionScore;
+		return "idScore-"+idScore+" idCard-"+idCard+" balance-"+balance+" ConditionScore-"+ConditionScore;
 	}
 }

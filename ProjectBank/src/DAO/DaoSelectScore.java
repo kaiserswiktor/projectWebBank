@@ -5,22 +5,27 @@ package DAO;
 
 import java.beans.PropertyVetoException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import requestsDataBaza.DataSource;
-import tableDataBaza.User;
+import tableDataBaza.CreditCard;
+import tableDataBaza.Score;
 
 /**
  * @author User
  *
  */
-public class DaoSelectPassword extends DaoSelect {
-	public void select() {
-		String passwordBaza;
+public class DaoSelectScore {
+	public Score daoScore(int CreditCard )  {
+		ResourceBundle resource = ResourceBundle.getBundle("recourse.PrepareStatement");
+		String user = resource.getString("score");
+		ResultSet rs = null;
 		Connection cn = null;
+		Score score= null;
+		CreditCard creditCard=null;
 		try {
 			cn = DataSource.getInstance().getConnection();// подключение пула
 															// Connection
@@ -28,21 +33,23 @@ public class DaoSelectPassword extends DaoSelect {
 			e1.printStackTrace();
 		}
 		try {
-			Statement st = null;
+			PreparedStatement st = null;
 			try { // 2 блок
-				st = cn.createStatement();
-				ResultSet rs = null;
-				try { // 3 блок
-					rs = st.executeQuery("SELECT PASSWORD_ FROM user WHERE E_MAIL='nikita@gmail.com';");
-
-					while (rs.next()) {
-						String PASSWORD_ = rs.getString(1);
-
-						passwordBaza = PASSWORD_;
-
-						System.out.println(passwordBaza);
-					}
-				} finally { // для 3-го блока try
+				try { // 3 блок 
+					st = cn.prepareStatement(user);
+					st.setInt(1, CreditCard);
+					rs = st.executeQuery();
+				
+				while (rs.next()) {
+					int ID_SCORE = rs.getInt(1);
+					int ID_Card = rs.getInt(3);
+					int balance = rs.getInt(4);
+					String condition = rs.getString(5);			
+					score = new Score(CreditCard, CreditCard, CreditCard, user );
+					 System.out.println(ID_SCORE+"-"+ID_Card+"-"+balance+"-"+condition);
+				}
+				}
+				 finally { // для 3-го блока try
 					/*
 					 * закрыть ResultSet, если он был открыт или ошибка
 					 * произошла во время чтения из него данных
@@ -53,7 +60,9 @@ public class DaoSelectPassword extends DaoSelect {
 						System.err.println("ошибка во время чтения из БД");
 					}
 				}
-			} finally {
+			} finally
+
+			{
 				/*
 				 * закрыть Statement, если он был открыт или ошибка произошла во
 				 * время создания Statement
@@ -81,25 +90,7 @@ public class DaoSelectPassword extends DaoSelect {
 				}
 			}
 		}
+		return score;
 
 	}
-
-	@Override
-	public void insert() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void drop() {
-		// TODO Auto-generated method stub
-
-	}
-
 }

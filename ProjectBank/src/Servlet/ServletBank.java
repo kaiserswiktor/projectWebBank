@@ -2,6 +2,7 @@ package Servlet;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.DaoSelectEmail;
-import DAO.DaoSelectPassword;
+import DAO.DaoSelectEmailPassword;
+import DAO.DaoSelectScore;
 import DAO.DaoSelectUser;
 
 /**
@@ -33,7 +34,12 @@ public class ServletBank extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		processRequest(request, response);
+		try {
+			processRequest(request, response);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -44,14 +50,15 @@ public class ServletBank extends HttpServlet {
 		doGet(request, response);
 	}
 	protected void processRequest(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		DaoSelectPassword m=new DaoSelectPassword();
-		DaoSelectEmail b= new DaoSelectEmail();
-		DaoSelectUser n = new DaoSelectUser();
-		m.select();
-		b.select();
-		n.select();
-	
+			HttpServletResponse response) throws ServletException, IOException, SQLException {
+		
+		DaoSelectUser n =new DaoSelectUser();
+		n.daoUser("nikita@gmail.com", "nikita");
+		//DaoSelectEmailPassword m= new DaoSelectEmailPassword();
+		//m.selectCheckUser("nikita@gmail.com", "nikita");
+		DaoSelectScore b=new DaoSelectScore();
+		b.daoScore(101);
+		
     String idUser="ff";
 		request.setCharacterEncoding("UTF-8");
 		
