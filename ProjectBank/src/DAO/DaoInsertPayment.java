@@ -16,7 +16,7 @@ import tableDataBaza.User;
 
 /**
  * @author User
- *
+ *request to add Payment
  */
 public class DaoInsertPayment implements Dao {
 	public void insertPayment( int idScore, String typePayment, int sumPayment){

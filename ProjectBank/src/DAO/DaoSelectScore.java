@@ -16,7 +16,7 @@ import tableDataBaza.User;
 
 /**
  * @author User
- *
+ *Class request to comparison Score. 
  */
 public class DaoSelectScore implements Dao {
 	public Score selectDaoScore(int CreditCard )  {

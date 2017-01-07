@@ -16,7 +16,7 @@ import tableDataBaza.User;
 
 /**
  * @author User
- *
+ *Class request to comparison user. 
  */
 public class DaoSelectUser implements Dao {
 	

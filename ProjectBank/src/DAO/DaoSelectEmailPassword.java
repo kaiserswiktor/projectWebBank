@@ -15,7 +15,7 @@ import tableDataBaza.User;
 
 /**
  * @author User
- *Class request to comparison Email and Password 
+ *Class request to comparison Email and Password. 
  */
 public class DaoSelectEmailPassword implements Dao {
 

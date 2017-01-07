@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
 
 /**
  * @author User
- *
+ *change request Balance.
  */
 public class DaoUpdateBalance {
 	public void updateBalance( int balance, int idScore){
