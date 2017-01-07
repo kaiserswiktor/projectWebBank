@@ -1,6 +1,5 @@
 package Servlet;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -22,23 +21,24 @@ import tableDataBaza.User;
 /**
  * Servlet implementation class ServletBank
  */
-@WebServlet(name="/ServletBank", urlPatterns = {"/Servlet"})
+@WebServlet(name = "/ServletBank", urlPatterns = { "/Servlet" })
 public class ServletBank extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ServletBank() {
-        super();
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
-	
-		
+	public ServletBank() {
+		super();
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		try {
 			processRequest(request, response);
 		} catch (SQLException e) {
@@ -48,42 +48,46 @@ public class ServletBank extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 	}
-	protected void processRequest(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException, SQLException {
-		
+
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException {
+
 		request.setCharacterEncoding("UTF-8");
-		DaoSelectUser user= new DaoSelectUser();
-		DaoSelectScore scoreUser= new DaoSelectScore();
-	
-		User User=user.selectDaoUser("nikita@gmail.com", "nikita");
-		String firstName=User.getFirstName();
-		String lastName=User.getLastName();
-		String role =User.getRole();
-		int idCard=User.getIdCreditCard();
-		Score Score=scoreUser.selectDaoScore(idCard);
-		int idScore=Score.getIdScore();
-		int balance=Score.getBalance();
-		String condition=Score.getConditionScore();
+		DaoSelectUser user = new DaoSelectUser();
+		DaoSelectScore scoreUser = new DaoSelectScore();
+
+		User User = user.selectDaoUser("nikita@gmail.com", "nikita");
+		String firstName = User.getFirstName();
+		String lastName = User.getLastName();
+		String role = User.getRole();
+		int idCard = User.getIdCreditCard();
+		Score Score = scoreUser.selectDaoScore(idCard);
+		int idScore = Score.getIdScore();
+		int balance = Score.getBalance();
+		String condition = Score.getConditionScore();
 		request.setAttribute("idCard", idCard);
 		request.setAttribute("idScore", idScore);
 		request.setAttribute("balance", balance);
 		request.setAttribute("role", role);
 		request.setAttribute("condition", condition);
-		request.setAttribute("Name", firstName+" "+lastName);
+		request.setAttribute("Name", firstName + " " + lastName);
 		request.setAttribute("idCard", idCard);
 		request.getRequestDispatcher("/jsp/UserName.jsp").forward(request, response);
-		
-		//request.getRequestDispatcher("/jsp/Payment.jsp").forward(request, response);
-	
-		//int idCard=101;
-		
-		//request.getRequestDispatcher("/jsp/UserScore.jsp").forward(request, response);
+
+		// request.getRequestDispatcher("/jsp/Payment.jsp").forward(request,
+		// response);
+
+		// int idCard=101;
+
+		// request.getRequestDispatcher("/jsp/UserScore.jsp").forward(request,
+		// response);
 	}
 
 }
