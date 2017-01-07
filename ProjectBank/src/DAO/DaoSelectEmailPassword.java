@@ -19,11 +19,10 @@ import tableDataBaza.User;
  */
 public class DaoSelectEmailPassword implements Dao {
 
-	public boolean selectCheckUser(String login, String password) throws SQLException {
+	public boolean selectCheckUser(String eMail, String password) throws SQLException {
 		ResourceBundle resource = ResourceBundle.getBundle("recourse.PrepareStatement");
 		String EmailPassword = resource.getString("EmailPassword");
-		System.out.println("yjhv");
-		ResultSet rs = null;
+	    ResultSet rs = null ;
 		Connection cn = null;
 		try {
 			cn = DataSource.getInstance().getConnection();// подключение пула
@@ -34,14 +33,14 @@ public class DaoSelectEmailPassword implements Dao {
 		try {
 			PreparedStatement st = null;
 
-			try { // 2 блок
+			try {
+				 rs = null;// 2 блок
 				try { // 3 блок
 					st = cn.prepareStatement(EmailPassword);
-					st.setString(1, login);
+					st.setString(1, eMail);
 					st.setString(2, password);
 					rs = st.executeQuery();
 					
-
 				} finally { // для 3-го блока try
 					/*
 					 * закрыть ResultSet, если он был открыт или ошибка
@@ -83,7 +82,8 @@ public class DaoSelectEmailPassword implements Dao {
 				}
 			}
 		}
-		return rs.next();
+		return true;
+	
 
 	}
 

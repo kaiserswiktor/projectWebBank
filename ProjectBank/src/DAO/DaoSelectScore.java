@@ -45,8 +45,7 @@ public class DaoSelectScore implements Dao {
 					int ID_Card = rs.getInt(3);
 					int balance = rs.getInt(4);
 					String condition = rs.getString(5);			
-					score = new Score(CreditCard, CreditCard, CreditCard, user );
-					 System.out.println(ID_SCORE+"-"+ID_Card+"-"+balance+"-"+condition);
+					score = new Score(ID_SCORE, ID_Card, balance, condition );
 				}
 				}
 				 finally { // для 3-го блока try

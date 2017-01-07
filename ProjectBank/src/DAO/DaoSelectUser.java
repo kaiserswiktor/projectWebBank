@@ -19,14 +19,14 @@ import tableDataBaza.User;
  *Class request to comparison user. 
  */
 public class DaoSelectUser implements Dao {
-	
-	public User selectdaoUser(String login, String password)  {
+
+	public User selectDaoUser(String eMail, String password)  {
 			ResourceBundle resource = ResourceBundle.getBundle("recourse.PrepareStatement");
 			String user = resource.getString("user");
 			ResultSet rs = null;
 			Connection cn = null;
 			User User= null;
-			CreditCard creditCard;
+			CreditCard creditCard=null;
 			try {
 				cn = DataSource.getInstance().getConnection();// подключение пула
 																// Connection
@@ -38,20 +38,16 @@ public class DaoSelectUser implements Dao {
 				try { // 2 блок
 					try { // 3 блок 
 						st = cn.prepareStatement(user);
-						st.setString(1, login);
+						st.setString(1, eMail);
 						st.setString(2, password);
 						rs = st.executeQuery();
-						 User = new User( user, user, user);
 					while (rs.next()) {
+						int idUser=rs.getInt(1);
 						String firstName = rs.getString(2);
 						String lastName = rs.getString(3);
 						String role = rs.getString(6);
-						int creditC=rs.getInt(7);
-						
-						 User = new User( firstName, lastName, role);
-						 creditCard=new CreditCard(creditC);
-						 System.out.println(firstName+lastName+role);
-						 System.out.println(creditC);
+						int idCard=rs.getInt(7);						
+						 User = new User(idUser,firstName,lastName,eMail,password,role,idCard);
 					}
 					}
 					 finally { // для 3-го блока try
@@ -106,13 +102,7 @@ public class DaoSelectUser implements Dao {
 	}
 
 
-	@Override
-	public User selectDaoUser(String login, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
+	
 	@Override
 	public Score selectDaoScore(int CreditCard) {
 		// TODO Auto-generated method stub
@@ -131,6 +121,8 @@ public class DaoSelectUser implements Dao {
 		// TODO Auto-generated method stub
 		
 	}
+
+
 
 	
 }

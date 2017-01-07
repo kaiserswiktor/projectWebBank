@@ -5,8 +5,8 @@
 </head>
 <body>
 	<form action="inputaction" method="POST">
-		Введите &nbsp; E - mail : <input name="eMail" type="text"><br> 
-		Введите  Password : <input name="Password" type="text"><br> 
+		Введите сумму платежа : <input name="sumPayment" type="Integer"><br> 
+		Введите  тип &nbsp; платежа &nbsp; : <input name="Password" type="text"><br> 
 		<input type="submit">
 	</form>
 </body>

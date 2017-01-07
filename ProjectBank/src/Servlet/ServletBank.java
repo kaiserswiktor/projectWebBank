@@ -2,9 +2,11 @@ package Servlet;
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +16,8 @@ import DAO.DaoInsertPayment;
 import DAO.DaoSelectEmailPassword;
 import DAO.DaoSelectScore;
 import DAO.DaoSelectUser;
+import tableDataBaza.Score;
+import tableDataBaza.User;
 
 /**
  * Servlet implementation class ServletBank
@@ -33,8 +37,8 @@ public class ServletBank extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-
+	
+		
 		try {
 			processRequest(request, response);
 		} catch (SQLException e) {
@@ -48,19 +52,38 @@ public class ServletBank extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		doGet(request, response);
+
 	}
 	protected void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException, SQLException {
 		
-		
-		
-    String idUser="ff";
 		request.setCharacterEncoding("UTF-8");
-		
-		request.setAttribute("idUser",idUser);
+		DaoSelectUser user= new DaoSelectUser();
+		DaoSelectScore scoreUser= new DaoSelectScore();
 	
-		request.getRequestDispatcher("/jsp/result.jsp").forward(request, response);
+		User User=user.selectDaoUser("nikita@gmail.com", "nikita");
+		String firstName=User.getFirstName();
+		String lastName=User.getLastName();
+		String role =User.getRole();
+		int idCard=User.getIdCreditCard();
+		Score Score=scoreUser.selectDaoScore(idCard);
+		int idScore=Score.getIdScore();
+		int balance=Score.getBalance();
+		String condition=Score.getConditionScore();
+		request.setAttribute("idCard", idCard);
+		request.setAttribute("idScore", idScore);
+		request.setAttribute("balance", balance);
+		request.setAttribute("role", role);
+		request.setAttribute("condition", condition);
+		request.setAttribute("Name", firstName+" "+lastName);
+		request.setAttribute("idCard", idCard);
+		request.getRequestDispatcher("/jsp/UserName.jsp").forward(request, response);
+		
+		//request.getRequestDispatcher("/jsp/Payment.jsp").forward(request, response);
+	
+		//int idCard=101;
+		
+		//request.getRequestDispatcher("/jsp/UserScore.jsp").forward(request, response);
 	}
 
 }

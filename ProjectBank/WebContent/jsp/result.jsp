@@ -4,6 +4,7 @@
 <title>Result Page</title>
 </head>
 <body>
-	<p>ID User ${idUser}</p>
+	<p>Fio - ${Name}</p>
+	<p>Id Credit Card - ${idCard}</p>
 </body>
 </html>

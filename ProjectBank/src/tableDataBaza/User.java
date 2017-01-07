@@ -13,24 +13,17 @@ public class User {
 	private String eMail;
 	private String password;
 	private String role;
+	private int idCreditCard;
 	
-	public User( String firstName, String lastName,String role){
-		
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.role = role;
-	}
 
-	public User(int idUser, String firstName, String lastName, String eMail, String password, String role) {
+	public User(int idUser, String firstName, String lastName, String eMail, String password, String role,int idCreditCard) {
 		this.idUser = idUser;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.eMail = eMail;
 		this.password = password;
 		this.role = role;
-	}
-	public User(String eMail){
-		this.eMail = eMail;	
+		this.idCreditCard=idCreditCard;
 	}
 
 	public int getIdUser() {
@@ -79,6 +72,13 @@ public class User {
 
 	public void SetRole(String role) {
 		this.role = role;
+	}
+	public int getIdCreditCard() {
+		return idCreditCard;
+	}
+
+	public void SetIdCreditCard(int idCreditCard) {
+		this.idCreditCard = idCreditCard;
 	}
 
 	@Override
