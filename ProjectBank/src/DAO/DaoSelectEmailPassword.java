@@ -10,13 +10,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import requestsDataBaza.DataSource;
+import tableDataBaza.Score;
+import tableDataBaza.User;
 
 /**
  * @author User
  *Class request to comparison Email and Password 
  */
-public class DaoSelectEmailPassword {
+public class DaoSelectEmailPassword implements Dao {
 
 	public boolean selectCheckUser(String login, String password) throws SQLException {
 		ResourceBundle resource = ResourceBundle.getBundle("recourse.PrepareStatement");
@@ -84,5 +85,29 @@ public class DaoSelectEmailPassword {
 		}
 		return rs.next();
 
+	}
+
+	@Override
+	public User selectDaoUser(String login, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Score selectDaoScore(int CreditCard) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insertPayment(int idScore, String typePayment, int sumPayment) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void drop() {
+		// TODO Auto-generated method stub
+		
 	}
 }

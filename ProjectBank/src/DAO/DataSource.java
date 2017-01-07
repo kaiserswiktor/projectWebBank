@@ -1,4 +1,4 @@
-package requestsDataBaza;
+package DAO;
 
 import java.beans.PropertyVetoException;
 import java.sql.Connection;

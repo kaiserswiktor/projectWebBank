@@ -1,5 +1,8 @@
 package DAO;
 
+import java.sql.SQLException;
+
+import tableDataBaza.Score;
 import tableDataBaza.User;
 
 /**
@@ -8,13 +11,11 @@ import tableDataBaza.User;
  *
  */
 public interface Dao {
-	public User daoUser(String login, String password);
-	public void insert();// добавление данных
-
-	public void update();// изменение данных
-
-	public void select();// просмотр данных
-
+	
+	public boolean selectCheckUser(String login, String password) throws SQLException;// проверка данных
+	public User selectDaoUser(String login, String password);//просмотр данных
+	public Score selectDaoScore(int CreditCard );//просмотр данных
+	public void insertPayment( int idScore, String typePayment, int sumPayment);//добавление данных
 	public void drop();// удаление данных
 
 }

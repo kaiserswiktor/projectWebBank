@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DAO.DaoInsertPayment;
 import DAO.DaoSelectEmailPassword;
 import DAO.DaoSelectScore;
 import DAO.DaoSelectUser;
@@ -52,12 +53,7 @@ public class ServletBank extends HttpServlet {
 	protected void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException, SQLException {
 		
-		DaoSelectUser n =new DaoSelectUser();
-		n.daoUser("nikita@gmail.com", "nikita");
-		//DaoSelectEmailPassword m= new DaoSelectEmailPassword();
-		//m.selectCheckUser("nikita@gmail.com", "nikita");
-		DaoSelectScore b=new DaoSelectScore();
-		b.daoScore(101);
+		
 		
     String idUser="ff";
 		request.setCharacterEncoding("UTF-8");

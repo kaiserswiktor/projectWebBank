@@ -6,29 +6,25 @@ package DAO;
 import java.beans.PropertyVetoException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import tableDataBaza.CreditCard;
 import tableDataBaza.Score;
 import tableDataBaza.User;
+
 
 /**
  * @author User
  *
  */
-public class DaoSelectScore implements Dao {
-	public Score selectDaoScore(int CreditCard )  {
+public class DaoInsertPayment implements Dao {
+	public void insertPayment( int idScore, String typePayment, int sumPayment){
 		ResourceBundle resource = ResourceBundle.getBundle("recourse.PrepareStatement");
-		String user = resource.getString("score");
-		ResultSet rs = null;
+		String payment = resource.getString("payment");
 		Connection cn = null;
-		Score score= null;
-		CreditCard creditCard=null;
 		try {
-			cn = DataSource.getInstance().getConnection();// подключение пула
-															// Connection
+			cn = DataSource.getInstance().getConnection();// подключение пула  Connection
 		} catch (SQLException | PropertyVetoException e1) {
 			e1.printStackTrace();
 		}
@@ -36,30 +32,14 @@ public class DaoSelectScore implements Dao {
 			PreparedStatement st = null;
 			try { // 2 блок
 				try { // 3 блок 
-					st = cn.prepareStatement(user);
-					st.setInt(1, CreditCard);
-					rs = st.executeQuery();
-				
-				while (rs.next()) {
-					int ID_SCORE = rs.getInt(1);
-					int ID_Card = rs.getInt(3);
-					int balance = rs.getInt(4);
-					String condition = rs.getString(5);			
-					score = new Score(CreditCard, CreditCard, CreditCard, user );
-					 System.out.println(ID_SCORE+"-"+ID_Card+"-"+balance+"-"+condition);
-				}
-				}
-				 finally { // для 3-го блока try
-					/*
-					 * закрыть ResultSet, если он был открыт или ошибка
-					 * произошла во время чтения из него данных
-					 */
-					if (rs != null) { // был ли создан ResultSet
-						rs.close();
-					} else {
-						System.err.println("ошибка во время чтения из БД");
-					}
-				}
+				st = cn.prepareStatement(payment);
+				   //st.setInteger(1, idPayment);
+				   st.setInt(1, idScore);
+				   st.setString(2, typePayment);
+				   st.setInt(3, sumPayment);
+				   st.executeUpdate();
+				/*  if (st != null) {
+						st.close();}	*/		
 			} finally
 
 			{
@@ -89,9 +69,11 @@ public class DaoSelectScore implements Dao {
 					System.err.println("Connection close error: " + e);
 				}
 			}
+		}	
+	}
+		finally{
+			
 		}
-		return score;
-
 	}
 
 	@Override
@@ -107,9 +89,9 @@ public class DaoSelectScore implements Dao {
 	}
 
 	@Override
-	public void insertPayment(int idScore, String typePayment, int sumPayment) {
+	public Score selectDaoScore(int CreditCard) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override
