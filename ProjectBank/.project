@@ -28,4 +28,11 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>WebContent/jsp/signin.jsp</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Desktop/%D0%9D%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D0%B0%D0%BF%D0%BA%D0%B0%20(5)/prjct/WebContent/signin.jsp</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>

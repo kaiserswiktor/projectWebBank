@@ -40,6 +40,7 @@ public class DaoSelectEmailPassword implements Dao {
 					st.setString(1, eMail);
 					st.setString(2, password);
 					rs = st.executeQuery();
+					System.out.println(password);
 					
 				} finally { // для 3-го блока try
 					/*
