@@ -13,6 +13,7 @@
 	<th>Condition - ${condition}</th>
 	</table>
 	<form action="MyServlet" method="POST">
+	<input type="hidden" name="command" value="Pay">
 		<input type="submit" value="Go to payment">
 	</form>
 </body>

@@ -41,8 +41,8 @@ public class DaoSelectScore implements Dao {
 					rs = st.executeQuery();
 				
 				while (rs.next()) {
-					int ID_SCORE = rs.getInt(1);
-					int ID_Card = rs.getInt(3);
+					int ID_SCORE = rs.getInt(3);
+					int ID_Card = rs.getInt(2);
 					int balance = rs.getInt(4);
 					String condition = rs.getString(5);			
 					score = new Score(ID_SCORE, ID_Card, balance, condition );

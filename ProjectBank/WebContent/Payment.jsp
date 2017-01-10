@@ -4,9 +4,11 @@
 <title>JSP input</title>
 </head>
 <body>
-	<form action="inputaction" method="POST">
+	
+	<form action="MyServlet" method="POST">
+	<input type="hidden" name="command" value="Payment">
 		Введите сумму платежа : <input name="sumPayment" type="Integer"><br> 
-		Введите  тип &nbsp; платежа &nbsp; : <input name="Password" type="text"><br> 
+		Введите  тип &nbsp; платежа &nbsp; : <input name="typePaymen" type="text"><br> 
 		<input type="submit">
 	</form>
 </body>

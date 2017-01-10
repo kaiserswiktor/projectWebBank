@@ -6,6 +6,7 @@
 </head>
 <body>
 	<form method="POST" action="MyServlet">
+	<input type="hidden" name="command" value="eMail">
 		<table>
 			<tr>
 				<td>Email</td>
