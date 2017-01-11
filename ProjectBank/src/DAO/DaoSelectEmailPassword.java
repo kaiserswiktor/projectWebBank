@@ -39,9 +39,7 @@ public class DaoSelectEmailPassword implements Dao {
 					st = cn.prepareStatement(EmailPassword);
 					st.setString(1, eMail);
 					st.setString(2, password);
-					rs = st.executeQuery();
-					System.out.println(password);
-					
+					rs = st.executeQuery();					
 				} finally { // для 3-го блока try
 					/*
 					 * закрыть ResultSet, если он был открыт или ошибка
@@ -94,11 +92,6 @@ public class DaoSelectEmailPassword implements Dao {
 		return null;
 	}
 
-	@Override
-	public Score selectDaoScore(int CreditCard) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public void insertPayment(int idScore, String typePayment, int sumPayment) {
@@ -111,4 +104,25 @@ public class DaoSelectEmailPassword implements Dao {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void updateBalance(int balance, int idScore) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Score selectDaoScore(int CreditCard) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void updateCondition(int idСard, String condition) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 }

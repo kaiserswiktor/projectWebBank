@@ -9,8 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-
-import tableDataBaza.CreditCard;
 import tableDataBaza.Score;
 import tableDataBaza.User;
 
@@ -25,7 +23,6 @@ public class DaoSelectScore implements Dao {
 		ResultSet rs = null;
 		Connection cn = null;
 		Score score= null;
-		CreditCard creditCard=null;
 		try {
 			cn = DataSource.getInstance().getConnection();// подключение пула
 															// Connection
@@ -113,6 +110,18 @@ public class DaoSelectScore implements Dao {
 
 	@Override
 	public void drop() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateBalance(int balance, int idScore) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateCondition(int idСard,String condition) {
 		// TODO Auto-generated method stub
 		
 	}

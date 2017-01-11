@@ -6,7 +6,7 @@
 <body>
 	Транзакция проведена!
 		<form action="MyServlet" method="POST">
-	<input type="hidden" name="command" value="Balance">
-		<input type="submit" value="Balance">
+	<input type="hidden" name="command" value="Adminreturn">
+		<input type="submit" value="return">
 </body>
 </html>

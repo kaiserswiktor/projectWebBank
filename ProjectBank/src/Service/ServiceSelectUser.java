@@ -3,9 +3,6 @@ package Service;
 import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import DAO.DaoSelectEmailPassword;
 import DAO.DaoSelectScore;
 import DAO.DaoSelectUser;
@@ -13,7 +10,7 @@ import tableDataBaza.Score;
 import tableDataBaza.User;
 
 public class ServiceSelectUser implements Service {
-
+     boolean admin=false;
 	@Override
 	public boolean doService(HttpServletRequest request) {
 		boolean status = false;
@@ -23,12 +20,9 @@ public class ServiceSelectUser implements Service {
 		try {
 			status = checkUser.selectCheckUser(eMail, password);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		if (status) {
-			HttpSession session=request.getSession();
 			DaoSelectUser user = new DaoSelectUser();
 			DaoSelectScore scoreUser = new DaoSelectScore();
 			User User = user.selectDaoUser(eMail, password);
@@ -46,9 +40,18 @@ public class ServiceSelectUser implements Service {
 			request.setAttribute("role", role);
 			request.setAttribute("condition", condition);
 			request.setAttribute("Name", firstName + " " + lastName);
-			request.setAttribute("idCard", idCard);
-			session.setAttribute(eMail, "eMail");
-			session.setAttribute(password, "Password");
+			request.setAttribute("idCard", idCard);		
+			request.getSession(true).setAttribute( "eMail",eMail);
+			request.getSession(true).setAttribute( "idScore",idScore);
+			request.getSession(true).setAttribute( "Password",password);
+			request.getSession(true).setAttribute( "balance",balance);
+			if(role.equals("client")){
+			return true;
+			}
+			else if(role.equals("admin")){
+				admin=true;	
+				
+			}
 			return true;
 		}
 		return false;

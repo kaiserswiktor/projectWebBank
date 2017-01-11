@@ -4,7 +4,7 @@
 <title>JSP input</title>
 </head>
 <body>
-	Транзакция проведена!
+	На вашем балансе не достаточно средств !
 		<form action="MyServlet" method="POST">
 	<input type="hidden" name="command" value="Balance">
 		<input type="submit" value="Balance">

@@ -11,10 +11,11 @@ public class ServiceSelectUserBalance implements Service {
 
 	@Override
 	public boolean doService(HttpServletRequest request) {
+		
 		DaoSelectUser user = new DaoSelectUser();
 		DaoSelectScore scoreUser = new DaoSelectScore();
 		String eMail=(String) request.getSession(true).getAttribute("eMail");
-		String password= (String) request.getSession(true).getAttribute("Password");
+		String password=(String) request.getSession(true).getAttribute("Password");
 		User User = user.selectDaoUser(eMail, password);
 		String firstName = User.getFirstName();
 		String lastName = User.getLastName();
@@ -31,7 +32,8 @@ public class ServiceSelectUserBalance implements Service {
 		request.setAttribute("condition", condition);
 		request.setAttribute("Name", firstName + " " + lastName);
 		request.setAttribute("idCard", idCard);
-		
+		request.getSession(true).setAttribute( "balance",balance);
+
 		return true;
 
 	}

@@ -9,11 +9,14 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import tableDataBaza.Score;
+import tableDataBaza.User;
+
 /**
  * @author User
  *change request Balance.
  */
-public class DaoUpdateBalance {
+public class DaoUpdateBalance implements Dao {
 	public void updateBalance( int balance, int idScore){
 		ResourceBundle resource = ResourceBundle.getBundle("recourse.PrepareStatement");
 		String payment = resource.getString("balance");
@@ -65,5 +68,41 @@ public class DaoUpdateBalance {
 		finally{
 			
 		}
+	}
+
+	@Override
+	public boolean selectCheckUser(String login, String password) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public User selectDaoUser(String login, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public void insertPayment(int idScore, String typePayment, int sumPayment) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void drop() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Score selectDaoScore(int CreditCard) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateCondition(int id—ard,String condition) {
+		// TODO Auto-generated method stub
+		
 	}
 }

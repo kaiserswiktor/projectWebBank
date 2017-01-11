@@ -9,25 +9,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+
 import tableDataBaza.Score;
 import tableDataBaza.User;
 
 /**
  * @author User
- *Class request to comparison user. 
+ *
  */
-public class DaoSelectUser implements Dao {
-
-	public User selectDaoUser(String eMail, String password)  {
+public class DaoUpdateCondition implements Dao {
+	public void updateCondition(int idСard,String condition) {
 			ResourceBundle resource = ResourceBundle.getBundle("recourse.PrepareStatement");
-			String user = resource.getString("user");
-			ResultSet rs = null;
+			String admin = resource.getString("admin");
 			Connection cn = null;
-			User User= null;
-
 			try {
-				cn = DataSource.getInstance().getConnection();// подключение пула
-																// Connection
+				cn = DataSource.getInstance().getConnection();// подключение пула  Connection
 			} catch (SQLException | PropertyVetoException e1) {
 				e1.printStackTrace();
 			}
@@ -35,30 +31,10 @@ public class DaoSelectUser implements Dao {
 				PreparedStatement st = null;
 				try { // 2 блок
 					try { // 3 блок 
-						st = cn.prepareStatement(user);
-						st.setString(1, eMail);
-						st.setString(2, password);
-						rs = st.executeQuery();
-					while (rs.next()) {
-						int idUser=rs.getInt(1);
-						String firstName = rs.getString(2);
-						String lastName = rs.getString(3);
-						String role = rs.getString(6);
-						int idCard=rs.getInt(7);						
-						 User = new User(idUser,firstName,lastName,eMail,password,role,idCard);
-					}
-					}
-					 finally { // для 3-го блока try
-						/*
-						 * закрыть ResultSet, если он был открыт или ошибка
-						 * произошла во время чтения из него данных
-						 */
-						if (rs != null) { // был ли создан ResultSet
-							rs.close();
-						} else {
-							System.err.println("ошибка во время чтения из БД");
-						}
-					}
+					st = cn.prepareStatement(admin);
+					   st.setString(1, condition);
+					   st.setInt(2, idСard);
+					   st.executeUpdate();
 				} finally
 
 				{
@@ -88,34 +64,32 @@ public class DaoSelectUser implements Dao {
 						System.err.println("Connection close error: " + e);
 					}
 				}
-			}
-			return User;
-
+			}	
 		}
+			finally{
+			}
+	}
 
 	@Override
-	public boolean selectCheckUser(String login, String password) {
+	public boolean selectCheckUser(String login, String password) throws SQLException {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	@Override
+	public User selectDaoUser(String login, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-	
 	@Override
 	public Score selectDaoScore(int CreditCard) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-
 	@Override
 	public void insertPayment(int idScore, String typePayment, int sumPayment) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void drop() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -126,13 +100,12 @@ public class DaoSelectUser implements Dao {
 		
 	}
 
+
 	@Override
-	public void updateCondition(int idСard,String condition) {
+	public void drop() {
 		// TODO Auto-generated method stub
 		
 	}
 
 
-
-	
 }

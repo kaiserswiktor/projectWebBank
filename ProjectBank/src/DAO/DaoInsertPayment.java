@@ -6,10 +6,8 @@ package DAO;
 import java.beans.PropertyVetoException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-
 import tableDataBaza.Score;
 import tableDataBaza.User;
 
@@ -77,7 +75,7 @@ public class DaoInsertPayment implements Dao {
 	}
 
 	@Override
-	public boolean selectCheckUser(String login, String password) {
+	public boolean selectCheckUser(String login, String password) throws SQLException {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -95,8 +93,23 @@ public class DaoInsertPayment implements Dao {
 	}
 
 	@Override
+	public void updateBalance(int balance, int idScore) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
 	public void drop() {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
+	@Override
+	public void updateCondition(int id—ard, String condition) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
