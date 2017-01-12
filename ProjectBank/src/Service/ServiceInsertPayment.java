@@ -9,10 +9,12 @@ public class ServiceInsertPayment implements Service {
 
 	@Override
 	public boolean doService(HttpServletRequest request) {
+		String condition= (String) request.getSession(true).getAttribute("condition");
 		int balance = (int) request.getSession(true).getAttribute("balance");
 		int idScore = (int) request.getSession(true).getAttribute("idScore");
 		String typePayment = request.getParameter("typePaymen");
 		int sumPayment = Integer.parseInt(request.getParameter("sumPayment"));
+		if(condition.equals("unblocked")){
 		if (sumPayment <= balance) {
 			DaoInsertPayment insertPayment = new DaoInsertPayment();
 			insertPayment.insertPayment(idScore, typePayment, sumPayment);
@@ -29,7 +31,10 @@ public class ServiceInsertPayment implements Service {
 		} else {
 			return false;
 		}
-
+		}
+		else{
+			return false;
+		}
 	}
 
 }
