@@ -5,20 +5,19 @@ package Service;
 
 import javax.servlet.http.HttpServletRequest;
 
-import DAO.DaoUpdateCondition;
+import DAO.DaoUpdateConditionImpl;
 
 /**
- * @author User
- *
+ * @author User class update condition Score
  */
 public class ServiceUpdateCondition implements Service {
 
 	@Override
 	public boolean doService(HttpServletRequest request) {
-      DaoUpdateCondition updateCondition =new DaoUpdateCondition();
-  	int idCreditCard = (int) request.getSession(true).getAttribute("idCreditCard");
-  	String condition=request.getParameter("condition");
-  	updateCondition.updateCondition(idCreditCard,condition);	
+		DaoUpdateConditionImpl updateCondition = new DaoUpdateConditionImpl();
+		int idCreditCard = (int) request.getSession(true).getAttribute("idCreditCard");
+		String condition = request.getParameter("condition");
+		updateCondition.updateCondition(idCreditCard, condition);
 		return true;
 	}
 

@@ -10,19 +10,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import tableDataBaza.Score;
-import tableDataBaza.User;
-
 /**
- * @author User
- *Class request to comparison Email and Password. 
+ * @author User Class request to comparison Email and Password.
  */
-public class DaoSelectEmailPassword implements Dao {
+public class DaoSelectEmailPasswordImpl extends DaoSelectUser {
 
 	public boolean selectCheckUser(String eMail, String password) throws SQLException {
 		ResourceBundle resource = ResourceBundle.getBundle("recourse.PrepareStatement");
 		String EmailPassword = resource.getString("EmailPassword");
-	    ResultSet rs = null ;
+		ResultSet rs = null;
 		Connection cn = null;
 		try {
 			cn = DataSource.getInstance().getConnection();// подключение пула
@@ -34,12 +30,12 @@ public class DaoSelectEmailPassword implements Dao {
 			PreparedStatement st = null;
 
 			try {
-				 rs = null;// 2 блок
+				rs = null;// 2 блок
 				try { // 3 блок
 					st = cn.prepareStatement(EmailPassword);
 					st.setString(1, eMail);
 					st.setString(2, password);
-					rs = st.executeQuery();					
+					rs = st.executeQuery();
 				} finally { // для 3-го блока try
 					/*
 					 * закрыть ResultSet, если он был открыт или ошибка
@@ -82,47 +78,7 @@ public class DaoSelectEmailPassword implements Dao {
 			}
 		}
 		return true;
-	
 
 	}
 
-	@Override
-	public User selectDaoUser(String login, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public void insertPayment(int idScore, String typePayment, int sumPayment) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void drop() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void updateBalance(int balance, int idScore) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Score selectDaoScore(int CreditCard) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public void updateCondition(int idСard, String condition) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
 }

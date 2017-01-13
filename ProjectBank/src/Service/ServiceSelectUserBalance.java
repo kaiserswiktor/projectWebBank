@@ -2,18 +2,20 @@ package Service;
 
 import javax.servlet.http.HttpServletRequest;
 
-import DAO.DaoSelectScore;
-import DAO.DaoSelectUser;
+import DAO.DaoSelectScoreImpl;
+import DAO.DaoSelectUserImpl;
 import tableDataBaza.Score;
 import tableDataBaza.User;
 
 public class ServiceSelectUserBalance implements Service {
-
+/**
+ * class look Balance User
+ */
 	@Override
 	public boolean doService(HttpServletRequest request) {
 		
-		DaoSelectUser user = new DaoSelectUser();
-		DaoSelectScore scoreUser = new DaoSelectScore();
+		DaoSelectUserImpl user = new DaoSelectUserImpl();
+		DaoSelectScoreImpl scoreUser = new DaoSelectScoreImpl();
 		String eMail=(String) request.getSession(true).getAttribute("eMail");
 		String password=(String) request.getSession(true).getAttribute("Password");
 		User User = user.selectDaoUser(eMail, password);

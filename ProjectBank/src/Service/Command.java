@@ -1,7 +1,11 @@
 package Service;
 
 import javax.servlet.http.HttpServletRequest;
-
+/**
+ * 
+ * @author User
+ *class controller
+ */
 public class Command {
 
 	public String execute(HttpServletRequest request) {
@@ -52,17 +56,17 @@ public class Command {
 			} else {
 				return "/Admin.jsp";
 			}
-		case("AdminScore"):
-			ServiceUpdateCondition v =new ServiceUpdateCondition();
-		result =v.doService(request);
-		if(result){
-		   return "/AdminCondition.jsp";	
-		}
-		else{ return "/AdminScore.jsp";
-		}
-		case("Adminreturn"):
+		case ("AdminScore"):
+			ServiceUpdateCondition v = new ServiceUpdateCondition();
+			result = v.doService(request);
+			if (result) {
+				return "/AdminCondition.jsp";
+			} else {
+				return "/AdminScore.jsp";
+			}
+		case ("Adminreturn"):
 			return "/Admin.jsp";
-		
+
 		}
 		return "/Index.jsp";
 	}

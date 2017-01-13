@@ -1,10 +1,8 @@
 package taskmodule3;
 
-import java.beans.PropertyVetoException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class Connect {
@@ -15,7 +13,7 @@ public class Connect {
 		String user = resource.getString("user");
 		String password = resource.getString("password");
 		String driver = resource.getString("driver");
-	
+
 		try {
 			Class.forName(driver);
 

@@ -2,6 +2,12 @@ package taskmodule3;
 
 	import java.security.MessageDigest;
 	import java.security.NoSuchAlgorithmException;
+	/**
+	 * 
+	 * @author User
+	 *class cryptographer
+	 */
+	
 	public class Md5{
 
 		  public String getHash(String str) {

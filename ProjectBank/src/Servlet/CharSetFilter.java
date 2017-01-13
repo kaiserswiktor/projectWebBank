@@ -11,11 +11,19 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebInitParam;
 
 /**
  * @author User
- *
+ * class Filter
  */
+@WebFilter(urlPatterns={"/CharSetFilter"},
+initParams={
+		@WebInitParam(name="encoding",
+				value="UTF-8",
+				description="Encoding Param")})
+
 public class CharSetFilter implements Filter {
 	private String encoding;
 	

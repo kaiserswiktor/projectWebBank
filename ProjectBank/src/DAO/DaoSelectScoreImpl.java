@@ -10,19 +10,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import tableDataBaza.Score;
-import tableDataBaza.User;
 
 /**
- * @author User
- *Class request to comparison Score. 
+ * @author User Class request to comparison Score.
  */
-public class DaoSelectScore implements Dao {
-	public Score selectDaoScore(int CreditCard )  {
+public class DaoSelectScoreImpl extends DaoScoreSelect {
+	public Score selectDaoScore(int CreditCard) {
 		ResourceBundle resource = ResourceBundle.getBundle("recourse.PrepareStatement");
 		String user = resource.getString("score");
 		ResultSet rs = null;
 		Connection cn = null;
-		Score score= null;
+		Score score = null;
 		try {
 			cn = DataSource.getInstance().getConnection();// подключение пула
 															// Connection
@@ -32,20 +30,19 @@ public class DaoSelectScore implements Dao {
 		try {
 			PreparedStatement st = null;
 			try { // 2 блок
-				try { // 3 блок 
+				try { // 3 блок
 					st = cn.prepareStatement(user);
 					st.setInt(1, CreditCard);
 					rs = st.executeQuery();
-				
-				while (rs.next()) {
-					int ID_SCORE = rs.getInt(3);
-					int ID_Card = rs.getInt(2);
-					int balance = rs.getInt(4);
-					String condition = rs.getString(5);			
-					score = new Score(ID_SCORE, ID_Card, balance, condition );
-				}
-				}
-				 finally { // для 3-го блока try
+
+					while (rs.next()) {
+						int ID_SCORE = rs.getInt(3);
+						int ID_Card = rs.getInt(2);
+						int balance = rs.getInt(4);
+						String condition = rs.getString(5);
+						score = new Score(ID_SCORE, ID_Card, balance, condition);
+					}
+				} finally { // для 3-го блока try
 					/*
 					 * закрыть ResultSet, если он был открыт или ошибка
 					 * произошла во время чтения из него данных
@@ -90,39 +87,4 @@ public class DaoSelectScore implements Dao {
 
 	}
 
-	@Override
-	public boolean selectCheckUser(String login, String password) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public User selectDaoUser(String login, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void insertPayment(int idScore, String typePayment, int sumPayment) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void drop() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void updateBalance(int balance, int idScore) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void updateCondition(int idСard,String condition) {
-		// TODO Auto-generated method stub
-		
-	}
 }

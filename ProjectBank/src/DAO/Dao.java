@@ -1,22 +1,15 @@
 package DAO;
 
-import java.sql.SQLException;
-import tableDataBaza.Score;
-import tableDataBaza.User;
 /**
  * 
  * @author User
  *
  */
 public interface Dao {
-	
-	public boolean selectCheckUser(String login, String password) throws SQLException;// проверка данных
-	public User selectDaoUser(String login, String password);//просмотр данных
-	public Score selectDaoScore(int CreditCard );//просмотр данных
-	public void insertPayment( int idScore, String typePayment, int sumPayment);//добавление данных
-	public void updateBalance( int balance, int idScore);//изменение баланса
-	public void updateCondition(int idСard,String condition);//изменение состояния счета
-	public void drop();// удаление данных.
-	
 
+	public void select();
+
+	public void insert();
+
+	public void update();
 }
